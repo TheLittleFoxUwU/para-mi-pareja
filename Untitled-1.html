@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi San Valentín</title>
+    
+
+    <style>
+        @font-face {
+    font-family: 'GoogleSans'; /* El nombre que tú quieras darle */
+    src: url('FlexRounded-M_freeze (2).ttf'); /* Asegúrate de que el nombre coincida exactamente */
+}
+@font-face {
+    font-family: 'GoogleBlack'; /* El nombre que tú quieras darle */
+    src: url('FlexRounded-B.ttf'); /* Asegúrate de que el nombre coincida exactamente */
+}
+        /* --- ESTILOS CSS (Diseño y Animaciones) --- */
+        :root {
+            --color-principal: #ff4d6d; /* Un rosa rojizo vibrante */
+            --color-secundario: #ff8fa3; /* Rosa más suave */
+            --color-fondo: #fff0f3; /* Fondo muy clarito */
+            --color-texto: #590d22; /* Texto oscuro para contraste */
+        }
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--color-fondo), #ffe5ec);
+    
+    /* --- AQUÍ ESTÁ EL ARREGLO MÁGICO --- */
+    display: flex;
+    flex-direction: column; /* ¡Esto obliga a que se pongan uno debajo del otro! */
+    align-items: center;    /* Esto asegura que queden centrados al medio */
+    
+    padding: 2rem 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+}
+
+        /* Contenedor principal de la tarjeta */
+        .card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+    z-index: 10;
+    border: 2px solid var(--color-secundario);
+    animation: aparecer 1.5s ease-out;
+    margin: auto; /* Esto la centra horizontalmente con el nuevo scroll */
+    height: auto; /* Se ajusta al contenido */
+}
+
+        h1 {
+             font-family: 'GoogleSans'; 
+            color: var(--color-principal);
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            font-style:black;
+        }
+
+        /* Estilo para tu mensaje personal */
+        .mensaje-personal {
+             font-family: 'GoogleSans'; 
+            font-size: 1.1rem;
+            color: var(--color-texto);
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            font-style: normal;
+        }
+
+        /* Título del contador */
+        .contador-titulo {
+            font-weight: 500;
+            color: var(--color-principal);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+             font-family: 'GoogleBlack'; 
+        }
+
+        /* Contenedor de los números del contador */
+        .contador-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap; /* Para que se adapte a móviles */
+        }
+
+        /* Las cajitas de cada número */
+        .caja-tiempo {
+            background: var(--color-principal);
+            color: white;
+            padding: 15px;
+            border-radius: 100px;
+            min-width: 50px;
+            box-shadow:  4px 8px rgba(255, 77, 109, 0.3);
+            animation: latido Suave 2s infinite;
+        }
+
+        .numero {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+             font-family: 'GoogleSans'; 
+        }
+
+        .etiqueta {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+             font-family: 'GoogleSans'; 
+        }
+
+        /* --- ANIMACIONES --- */
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes latidoSuave {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); box-shadow: 0 6px 12px rgba(255, 77, 109, 0.4); }
+        }
+
+        /* Estilos para los corazones flotantes del fondo */
+      /* --- NUEVO DISEÑO DE CORAZONES (TÉCNICA CLÁSICA) --- */
+/* --- CORAZONES FLOTANTES ARREGLADOS --- */
+.corazon-bg {
+    position: fixed; /* CAMBIO CLAVE: Se fija a la pantalla, no al papel */
+    bottom: -10vh;   /* Empiezan un poco más abajo de lo que ves */
+    transform: rotate(-45deg);
+    opacity: 0.7;
+    z-index: 50; /* Por encima de todo, pero transparente */
+    background-color: inherit;
+    animation: flotarUp linear forwards;
+    pointer-events: none; /* IMPORTANTE: Para que puedas seleccionar texto aunque haya corazones */
+}
+
+.corazon-bg::before,
+.corazon-bg::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: inherit;
+}
+
+.corazon-bg::before {
+    top: -50%;
+    left: 0;
+}
+
+.corazon-bg::after {
+    top: 0;
+    left: 50%;
+}
+
+@keyframes flotarUp {
+    0% {
+        transform: translateY(0) rotate(-45deg);
+        opacity: 1;
+    }
+    100% {
+        /* Suben hasta salirse de la pantalla por arriba */
+        transform: translateY(-120vh) rotate(315deg); 
+        opacity: 0;
+    }
+}
+}
+
+        /* Ajuste para pantallas pequeñas (celulares) */
+        @media (max-width: 480px) {
+            h1 { font-size: 2.5rem; }
+            .card { padding: 1.5rem; }
+            .caja-tiempo { min-width: 60px; padding: 10px; }
+            .numero { font-size: 1.5rem; }
+            .etiqueta { font-size: 0.7rem; }
+        }
+
+/* --- ESTILOS PARA EL CORAZÓN GIGANTE FINAL (VERSIÓN 2: MÁS GRANDE Y CENTRADO) --- */
+
+/* El contenedor ahora ocupa todo el ancho para asegurar el centrado */
+/* --- CORRECCIÓN DE ESPACIO PARA EL CORAZÓN --- */
+.contenedor-final {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* Aumentamos a 200px porque las partes redondas del corazón sobresalen mucho hacia arriba */
+    margin-top: 200px; 
+    margin-bottom: 100px;
+}
+
+/* La base cuadrada del corazón AHORA MUCHO MÁS GRANDE */
+.corazon-gigante {
+    position: relative;
+    width: 300px; /* ANTES: 180px -> AHORA: 300px */
+    height: 300px;
+    background-color: var(--color-principal);
+    transform: rotate(-45deg);
+    animation: latidoGigante 2.5s infinite ease-in-out;
+    box-shadow: 0 15px 40px rgba(255, 77, 109, 0.5); /* Sombra más grande */
+}
+
+/* Los círculos también crecen */
+.corazon-gigante::before,
+.corazon-gigante::after {
+    content: "";
+    position: absolute;
+    width: 300px; /* Igual que la base */
+    height: 300px;
+    background-color: inherit;
+    border-radius: 50%;
+}
+
+/* Ajustamos la posición de los círculos al nuevo tamaño */
+.corazon-gigante::before {
+    top: -150px; /* La mitad del nuevo tamaño (300/2) */
+    left: 0;
+}
+
+.corazon-gigante::after {
+    top: 0;
+    left: 150px; /* La mitad del nuevo tamaño */
+}
+
+/* El texto, más grande y asegurando el centrado */
+.texto-final {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg); /* Esto lo centra perfectamente */
+    color: white;
+    font-family: 'GoogleBlack', cursive;
+    font-size: 3rem; /* Texto más grande */
+    text-align: center;
+    width: 350px; /* Un área de texto más ancha */
+    margin: 0;
+    z-index: 10;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+}
+
+/* Animación de latido */
+@keyframes latidoGigante {
+    0%, 100% { transform: rotate(-45deg) scale(1); }
+    50% { transform: rotate(-45deg) scale(1.05); }
+}
+
+/* Ajuste importante para celulares, para que no se salga de la pantalla */
+@media (max-width: 480px) {
+    .corazon-gigante {
+        width: 200px;
+        height: 200px;
+    }
+    .corazon-gigante::before, .corazon-gigante::after {
+        width: 200px;
+        height: 200px;
+    }
+    .corazon-gigante::before { top: -100px; }
+    .corazon-gigante::after { left: 100px; }
+    .texto-final {
+        font-size: 2rem;
+        width: 240px;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Feliz San Valentín mi Lobito:3 </h1>
+
+        <p class="mensaje-personal">
+            Mi lindo amorcito, tengo que decir que estos, 242 dias desde que iniciamos todo esto fueron toda una aventura y todo un lindo aprendizaje a tu ladito
+            No podria estar mas feliz de tenerte conmigo y a pesar de todo lo que pasamos, siempre me consuelas con un "todo estará bien" y yo confío en eso
+            Te amo demasiado mi Daguito hermoso </p>
+        <div class="contador-container">
+            <p class="contador-titulo">Han pasado:</p>
+
+            <div class="contador-wrapper" id="contador">
+                <div class="caja-tiempo">
+                    <span class="numero" id="dias">0</span>
+                    <span class="etiqueta">Días</span>
+                </div>
+                <div class="caja-tiempo">
+                    <span class="numero" id="horas">00</span>
+                    <span class="etiqueta">Horas</span>
+                </div>
+                <div class="caja-tiempo">
+                    <span class="numero" id="minutos">00</span>
+                    <span class="etiqueta">Minutos</span>
+                </div>
+                <div class="caja-tiempo">
+                    <span class="numero" id="segundos">00</span>
+                    <span class="etiqueta">Segundos</span>
+                </div>
+                 <p class="contador-titulo">Desde nuestro amor :3</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* --- JAVASCRIPT (Lógica del contador y animaciones) --- */
+
+        // =================================================================
+        // >>>>> ¡IMPORTANTE! CONFIGURA TU FECHA AQUÍ ABAJO <<<<<
+        // =================================================================
+        // Formato: Año-Mes-Día T Hora:Minuto:Segundo
+        // Ejemplo: Si empezaron el 14 de febrero de 2023 a las 6 de la tarde:
+        // const fechaInicio = new Date('2023-02-14T18:00:00');
+
+        const fechaInicio = new Date('2025-06-18T00:00:00'); // <--- ¡CAMBIA ESTO!
+
+        // =================================================================
+
+        const elementos = {
+            dias: document.getElementById('dias'),
+            horas: document.getElementById('horas'),
+            minutos: document.getElementById('minutos'),
+            segundos: document.getElementById('segundos')
+        };
+
+        function actualizarContador() {
+            const ahora = new Date();
+            // Calculamos la diferencia en milisegundos
+            const diferencia = ahora - fechaInicio;
+
+            // Cálculos matemáticos para convertir milisegundos a días, horas, etc.
+            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+            // Actualizamos el HTML. Usamos padStart(2, '0') para que los números
+            // menores a 10 tengan un cero adelante (ej: "05" en vez de "5").
+            elementos.dias.innerText = dias;
+            elementos.horas.innerText = horas.toString().padStart(2, '0');
+            elementos.minutos.innerText = minutos.toString().padStart(2, '0');
+            elementos.segundos.innerText = segundos.toString().padStart(2, '0');
+        }
+
+        // Función para crear los corazones flotantes del fondo
+        // Función para crear los corazones flotantes del fondo
+function crearCorazon() {
+    const corazon = document.createElement('div');
+    corazon.classList.add('corazon-bg');
+    
+    // Posición horizontal aleatoria (0 a 100% del ancho de la pantalla)
+    corazon.style.left = Math.random() * 100 + 'vw';
+
+    // Tamaño aleatorio
+    const sizeValue = Math.random() * 30 + 10; 
+    corazon.style.width = sizeValue + 'px';
+    corazon.style.height = sizeValue + 'px';
+    
+    // Velocidad aleatoria (los más pequeños suben más lento, los grandes más rápido o viceversa)
+    corazon.style.animationDuration = Math.random() * 3 + 3 + 's'; 
+    
+    // Color aleatorio
+    corazon.style.backgroundColor = Math.random() > 0.5 ? 'var(--color-principal)' : 'var(--color-secundario)';
+
+    document.body.appendChild(corazon);
+
+    setTimeout(() => {
+        corazon.remove();
+    }, 6000);
+}
+
+// Generar corazones muy rápido para llenar la pantalla
+setInterval(crearCorazon, 100);
+// ... resto del código ...
+
+// Iniciar el contador...
+setInterval(actualizarContador, 1000);
+actualizarContador();
+
+// --- CAMBIO: Salen muchísimo más rápido ---
+// Cambiamos 400ms por 100ms. ¡Ahora saldrán 10 corazones por segundo!
+
+
+    </script>
+    </div>
+
+<div class="contenedor-final">
+    <div class="corazon-gigante">
+        <p class="texto-final">Lobito y su Zorrito UwU</p>
+    </div>
+</div>
+</body>
+</html>
